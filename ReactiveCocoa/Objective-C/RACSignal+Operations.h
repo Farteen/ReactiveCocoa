@@ -177,6 +177,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// `error` events, and completes when all input signals complete.
 + (RACSignal *)combineLatest:(id<NSFastEnumeration>)signals;
 
+///combine信号的个数会合并到一起,但是reduce后跟的参数是和合并信号的个数相关
 /// Combines signals using +combineLatest:, then reduces the resulting tuples
 /// into a single value using -reduceEach:.
 ///
@@ -198,6 +199,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// `reduceBlock`.
 + (RACSignal *)combineLatest:(id<NSFastEnumeration>)signals reduce:(id (^)())reduceBlock;
 
+///将signal合并到一起
 /// Merges the receiver and the given signal with `+merge:` and returns the
 /// resulting signal.
 - (RACSignal *)merge:(RACSignal *)signal;
@@ -235,6 +237,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// `block`. If the receiver errors out, the returned signal will error as well.
 - (RACSignal *)then:(RACSignal * (^)(void))block;
 
+///拼接成一个信号的信号,双层
 /// Concats the inner signals of a signal of signals.
 - (RACSignal *)concat;
 
@@ -332,6 +335,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// Returns a disposable which can be used to terminate the binding.
 - (RACDisposable *)setKeyPath:(NSString *)keyPath onObject:(NSObject *)object nilValue:(id)nilValue;
 
+///定时器
 /// Sends NSDate.date every `interval` seconds.
 ///
 /// interval  - The time interval in seconds at which the current time is sent.
@@ -360,6 +364,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// `scheduler`.
 + (RACSignal *)interval:(NSTimeInterval)interval onScheduler:(RACScheduler *)scheduler withLeeway:(NSTimeInterval)leeway;
 
+///依赖,直到某个信号发送next或者completed,接收者才发送next
 /// Takes `next`s until the `signalTrigger` sends `next` or `completed`.
 ///
 /// Returns a signal which passes through all events from the receiver until
@@ -367,6 +372,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// will send `completed`.
 - (RACSignal *)takeUntil:(RACSignal *)signalTrigger;
 
+///依赖,直到某个信号发送next或者completed或者error,接收者才发送next
 /// Takes `next`s until the `replacement` sends an event.
 ///
 /// replacement - The signal which replaces the receiver as soon as it sends an
@@ -466,6 +472,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// This can be used to effectively turn a hot signal into a cold signal.
 + (RACSignal *)defer:(RACSignal * (^)(void))block;
 
+///调用switchToLatest的前提receiver必须是一个信号们的信号,contact等
 /// Every time the receiver sends a new RACSignal, subscribes and sends `next`s and
 /// `error`s only for that signal.
 ///
