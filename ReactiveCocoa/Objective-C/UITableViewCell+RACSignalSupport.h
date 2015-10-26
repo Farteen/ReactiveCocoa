@@ -11,7 +11,7 @@
 @class RACSignal;
 
 @interface UITableViewCell (RACSignalSupport)
-
+///在cell重用后在添加button的事件,很重要...
 /// A signal which will send a RACUnit whenever -prepareForReuse is invoked upon
 /// the receiver.
 ///
