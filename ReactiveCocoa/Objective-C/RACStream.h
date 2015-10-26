@@ -26,14 +26,17 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 /// to be overridden.
 @interface RACStream : NSObject
 
+///E,空
 /// Returns an empty stream.
 + (instancetype)empty;
 
+///V,返回一个值的Stream
 /// Lifts `value` into the stream monad.
 ///
 /// Returns a stream containing only the given value.
 + (instancetype)return:(id)value;
 
+///B,返回一个StreamBindBlock的
 /// Lazily binds a block to the values in the receiver.
 ///
 /// This should only be used if you need to terminate the bind early, or close
@@ -47,6 +50,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 /// applications of `block`.
 - (instancetype)bind:(RACStreamBindBlock (^)(void))block;
 
+///C,拼接
 /// Appends the values of `stream` to the values in the receiver.
 ///
 /// stream - A stream to concatenate. This must be an instance of the same
@@ -55,6 +59,7 @@ typedef RACStream * (^RACStreamBindBlock)(id value, BOOL *stop);
 /// Returns a new stream representing the receiver followed by `stream`.
 - (instancetype)concat:(RACStream *)stream;
 
+///Z,拼成一个Tuple
 /// Zips the values in the receiver with those of the given stream to create
 /// RACTuples.
 ///
