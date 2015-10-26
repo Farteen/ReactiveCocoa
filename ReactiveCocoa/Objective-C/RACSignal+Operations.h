@@ -56,6 +56,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// and errors are always forwarded immediately.
 - (RACSignal *)throttle:(NSTimeInterval)interval;
 
+///
 /// Throttles `next`s for which `predicate` returns YES.
 ///
 /// When `predicate` returns YES for a `next`:
@@ -81,6 +82,7 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// returns YES. Completion and errors are always forwarded immediately.
 - (RACSignal *)throttle:(NSTimeInterval)interval valuesPassingTest:(BOOL (^)(id next))predicate;
 
+///于next和complete事件interval后执行
 /// Forwards `next` and `completed` events after delaying for `interval` seconds
 /// on the current scheduler (on which the events were delivered).
 ///
@@ -91,9 +93,11 @@ extern const NSInteger RACSignalErrorNoMatchingCase;
 /// are always forwarded immediately.
 - (RACSignal *)delay:(NSTimeInterval)interval;
 
+///当信号完成时,会重新订阅
 /// Resubscribes when the signal completes.
 - (RACSignal *)repeat;
 
+///initially后者的signal要先于前者initially的signal执行
 /// Executes the given block each time a subscription is created.
 ///
 /// block - A block which defines the subscription side effects. Cannot be `nil`.
